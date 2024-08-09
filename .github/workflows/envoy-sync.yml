@@ -61,11 +61,10 @@ jobs:
         env:
           GH_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
       - run: git config --get-regexp '.*'
-      - run: cat .git/config
-      - uses: envoyproxy/toolshed/gh-actions/dispatch@actions-v0.0.34
+
+      - uses: envoyproxy/toolshed/gh-actions/dispatch@actions-v0.2.30
         with:
           repository: "tedjpoole/test-downstream"
-          ref: main
-          key: "${{ secrets.ENVOY_CI_SYNC_APP_KEY }}"
           workflow: envoy-sync-receive.yaml
-          app_id: ${{ secrets.ENVOY_CI_SYNC_APP_ID }}
+          token: "${{ secrets.GITHUB_TOKEN }}"
+          ref: main

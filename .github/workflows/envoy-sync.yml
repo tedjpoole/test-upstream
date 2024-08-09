@@ -1,0 +1,33 @@
+name: 'Sync downstream'
+
+on:
+  push:
+    branches:
+    - main
+    - release/v1.28
+    - release/v1.30
+
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-22.04
+    if: >-
+      ${{
+          github.repository == 'test-upstream'
+          && (github.event.push || !contains(github.actor, '[bot]'))
+      }}
+    strategy:
+      fail-fast: false
+    steps:
+    - uses: envoyproxy/toolshed/gh-actions/dispatch@actions-v0.0.34
+      with:
+        repository: "tedjpoole/test-downstream"
+        ref: main
+        key: "${{ secrets.ENVOY_CI_SYNC_APP_KEY }}"
+        workflow: envoy-sync-receive.yaml
+        app_id: ${{ secrets.ENVOY_CI_SYNC_APP_ID }}

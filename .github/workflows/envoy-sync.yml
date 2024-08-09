@@ -20,6 +20,9 @@ jobs:
       fail-fast: false
     steps:
     - run: echo "$GITHUB_CONTEXT"
+    - run: gh auth status
+    - run: git config --get-regexp '.*'
+    - run: cat .git/config
     - uses: envoyproxy/toolshed/gh-actions/dispatch@actions-v0.0.34
       with:
         repository: "tedjpoole/test-downstream"

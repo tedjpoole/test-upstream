@@ -52,7 +52,7 @@ jobs:
 
       - name: Curl dispatch
         run: |
-          curl -X POST -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/tedjpoole/test-downstream/actions/workflows/envoy-sync-receive/dispatches" -d '{"ref":"refs/heads/master"}'
+          curl -X POST -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{ secrets.MYPAT }}" "https://api.github.com/repos/tedjpoole/test-downstream/actions/workflows/envoy-sync-receive/dispatches" -d '{"ref":"refs/heads/master"}'
 
       - uses: envoyproxy/toolshed/gh-actions/dispatch@actions-v0.2.30
         with:

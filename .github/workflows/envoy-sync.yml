@@ -58,5 +58,5 @@ jobs:
         with:
           repository: "tedjpoole/test-downstream"
           workflow: envoy-sync-receive.yaml
-          token: "${{ secrets.GITHUB_TOKEN }}"
+          token: "${{ secrets.MYPAT }}"
           ref: main

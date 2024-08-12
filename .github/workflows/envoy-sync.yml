@@ -50,13 +50,12 @@ jobs:
           MATRIX_CONTEXT: ${{ toJson(matrix) }}
         run: echo "$MATRIX_CONTEXT"
 
-      - name: Curl dispatch
-        run: |
-          curl -X POST -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{ secrets.MYPAT }}" "https://api.github.com/repos/tedjpoole/test-downstream/actions/workflows/envoy-sync-receive/dispatches" -d '{"ref":"refs/heads/main"}'
-
       - uses: envoyproxy/toolshed/gh-actions/dispatch@actions-v0.2.30
         with:
           repository: "tedjpoole/test-downstream"
           workflow: envoy-sync-receive.yaml
           token: "${{ secrets.MYPAT }}"
           ref: main
+          inputs: |
+            branch: ${{ github.ref_name }}
+

@@ -38,3 +38,4 @@
 
 
 Aded issue read-write permission to app
+Resolved merge conflict for PR
